@@ -1,0 +1,217 @@
+<% var title='Recipes Page' %>
+    <% var page='recipes' %>
+        <% var body=false %>
+            <% include ../../layouts/master %>
+                <% include ../../partials/header%>
+                    <link rel="stylesheet" href="../../../public/assets/css/boostrap.css">
+                    <link rel="stylesheet" href="../../../public/assets/css/selectData.css">
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Recipes</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item">Recipes</div>
+                                </div>
+                            </div>
+                            <% if(successmessage !='' ){%>
+                                <div class="alert alert-success alert-dismissible show fade successmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= successmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h2 class="section-title">Recipes</h2>
+                                                <p class="section-lead">Recipes List</p>
+                                            </div>
+                                            <div style="padding-right:60px">
+                                                <a href="/addRecipes" style="margin-top:34px;height:36px;"
+                                                    class="btn btn-primary">ADD RECIPE</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="card-body">
+                                                    <% if(recipesList.length> 0) { %>
+
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table-1">
+                                                                <thead>
+                                                                    <th>Sr.</th>
+                                                                    <th>Food Name</th>
+                                                                    <th>Creator name</th>
+                                                                    <th>Tags</th>
+                                                                    <th>Status</th>
+                                                                    <th style="text-align: center;">Action</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% for(var i=0; i < recipesList.length; i++) { %>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= i+1 %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= recipesList[i].name %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= recipesList[i].creatorName %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <div style="max-width:130px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                        class="alert alert-warning">
+                                                                                        <%= recipesList[i].tags[0] %>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <div style="max-width:130px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                        class="alert alert-warning">
+                                                                                        <%= recipesList[i].tags[1] %>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <% if(recipesList[i].status=="Active" )
+                                                                                    { %>
+                                                                                    <select
+                                                                                        class="form-control alert alert-success"
+                                                                                        style="max-width:95px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                        name="status"
+                                                                                        onchange="toggleStatus('<%= recipesList[i]._id %>','<%= recipesList[i].status %>')">
+                                                                                        <option value="Active"
+                                                                                            style="background-color: white">
+                                                                                            Active
+                                                                                        </option>
+                                                                                        <option value="Inactive"
+                                                                                            style="background-color: white">
+                                                                                            Inactive</option>
+                                                                                    </select>
+                                                                                    <% } %>
+                                                                                        <% if(recipesList[i].status=="Inactive"
+                                                                                            ) { %>
+                                                                                            <select
+                                                                                                class="form-control alert alert-danger"
+                                                                                                style="max-width:110px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                                name="status"
+                                                                                                onchange="toggleStatus('<%= recipesList[i]._id %>','<%= recipesList[i].status %>')">
+                                                                                                <option value="Inactive"
+                                                                                                    style="background-color: white">
+                                                                                                    Inactive</option>
+                                                                                                <option value="Active"
+                                                                                                    style="background-color: white">
+                                                                                                    Active
+                                                                                                </option>
+                                                                                            </select>
+                                                                                            <% } %>
+                                                                            </td>
+                                                                            <td class="d-flex justify-content-center"
+                                                                                style="min-height: 70px!important;">
+                                                                                <a class="btn btn-danger"
+                                                                                    data-toggle="tooltip" title="Delete"
+                                                                                    style="
+                                                                                width: 10px !important;
+                                                                                text-align: center !important;
+                                                                                padding-left: 7px !important;
+                                                                                padding-right: 17px !important;
+                                                                                height: 26px !important;
+                                                                                padding-top: 0px !important;
+                                                                                color: white !important;
+                                                                                margin-right: 5px !important;
+                                                                            " data-confirm="Are You Sure?|This action can not be undone. Do you want to delete recipe?"
+                                                                                    data-confirm-yes="location.href='/deleteRecipe?id=<%= recipesList[i]._id %>'"><i
+                                                                                        class="fas fa-trash-alt"
+                                                                                        style="font-size: 10px !important"></i></a>
+                                                                                <a href="editRecipe?id=<%= recipesList[i]._id %>"
+                                                                                    class="btn btn-success" style="
+                                                                                width: 10px !important;
+                                                                                text-align: center !important;
+                                                                                padding-left: 7px !important;
+                                                                                padding-right: 17px !important;
+                                                                                height: 26px !important;
+                                                                                margin-right: 5px !important;
+                                                                                padding-top: 0px !important;
+                                                                            "><i class="fas fa-edit"
+                                                                                        style="font-size: 10px !important"></i></a>
+                                                                                <a href="/recipeDetails?id=<%= recipesList[i]._id %>"
+                                                                                    class="btn btn-primary" style="
+                                                                                width: 10px !important;
+                                                                                text-align: center !important;
+                                                                                padding-left: 7px !important;
+                                                                                margin-right: 5px !important;
+                                                                                padding-right: 17px !important;
+                                                                                height: 26px !important;
+                                                                                padding-top: 0px !important;
+                                                                            "><i class="fa fa-eye" aria-hidden="true"
+                                                                                        style="font-size: 10px !important"></i></a>
+                                                                                <a class="btn btn-primary"
+                                                                                    data-toggle="tooltip"
+                                                                                    title="Download" style="
+                                                                                    width: 10px !important;
+                                                                                    text-align: center !important;
+                                                                                    padding-left: 7px !important;
+                                                                                    padding-right: 17px !important;
+                                                                                    height: 26px !important;
+                                                                                    padding-top: 0px !important;
+                                                                                    color: white !important;
+                                                                                    margin-right: 5px !important;
+                                                                                " data-confirm="Are You Sure?|Do you want to download recipe video?"
+                                                                                    data-confirm-yes="location.href='/recipeDownload?video=<%= recipesList[i].file %>'"><i
+                                                                                        class="fa fa-download"
+                                                                                        style="font-size: 10px !important"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <% } else {%>
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-12 col-lg-12 "
+                                                                    style="text-align:center">
+                                                                    <img src="../../public//assets//img/noRecord.svg" />
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+                    <script type="text/javascript"
+                        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src="../../../public/assets/js/page/modules-datatables.js"></script>
+
+                    <script type="text/javascript"
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.js"
+                        integrity="sha512-dc2FZrizXo7Qgp7fVmaxd9bDVoDAoDI8JfVR0MjkxUeJzPXa2M+R1nx7X0FVdlH6znGYo+BASCVsLnu5gTQQlQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script>
+                        function toggleStatus(id, status) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/updateStatus",
+                                data: {
+                                    id: id,
+                                    status: status,
+                                    list: "recipe"
+                                },
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    console.log(data);
+                                }
+                            });
+                        }
+                    </script>
+                    <% include ../../partials/footer%>

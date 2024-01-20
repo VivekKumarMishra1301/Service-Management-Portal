@@ -1,0 +1,86 @@
+<% var title='Add Categories Page' %>
+    <% var page='addTags' %>
+        <% var body=false %>
+            <% include ../../layouts/master %>
+                <% include ../../partials/header%>
+                    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+                        rel="stylesheet" />
+                    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Categories</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item"><a href="/Categories">Categories</a></div>
+                                    <div class="breadcrumb-item">Add</div>
+                                </div>
+                            </div>
+                            <% if(errmessage !='' ){%>
+                                <div class="alert alert-danger alert-dismissible show fade errmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= errmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <h2 class="section-title">Add Category</h2>
+                                        <p class="section-lead">
+                                            Add Category according to the form requirement .
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="card">
+                                                    <form method="POST" action="/saveCategory" class="needs-validation"
+                                                        novalidate="">
+                                                        <div class="card-header">
+                                                            <h4>Category Details</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class=" d-flex justify-content-between">
+                                                                <div class="form-group col-6">
+                                                                    <label>Category Name</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        required="" placeholder="Enter Category Name">
+                                                                    <div class="invalid-feedback">
+                                                                        What's Category name and must be valid?
+                                                                    </div>
+                                                                </div>
+                                                                <% if(CategoriesList.length>0){%>
+                                                                    <div class="form-group col-6">
+                                                                        <label>Sub Category</label>
+                                                                        <select class="form-control" name="parent">
+                                                                            <option value="">
+                                                                                Select Category
+                                                                            </option>
+                                                                            <% for(var
+                                                                                i=0;i<CategoriesList.length;i++){%>
+                                                                                <option
+                                                                                    value="<%= CategoriesList[i].name%>">
+                                                                                    <%= CategoriesList[i].name%>
+                                                                                </option>
+                                                                                <%}%>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">
+                                                                            Select Sub Category
+                                                                        </div>
+                                                                    </div>
+                                                                    <%}%>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-right" style="padding-right:40px">
+                                                            <button class="btn btn-primary"
+                                                                style="font-size: 14px;">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+                    <% include ../../partials/footer%>

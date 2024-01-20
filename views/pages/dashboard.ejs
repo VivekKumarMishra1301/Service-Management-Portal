@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Entree</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"
+    integrity="sha512-f8mUMCRNrJxPBDzPJx3n+Y5TC5xp6SmStstEfgsDXZJTcxBakoB5hvPLhAfJKa9rCvH+n3xpJ2vQByxLk4WP2g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../../node_modules/summernote/dist/summernote-bs4.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap-social/bootstrap-social.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../../public/assets/">
+  <link rel="stylesheet" href="../../public/assets/css/style.css">
+  <link rel="stylesheet" href="../../public/assets/css/components.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+                  class="fas fa-search"></i></a></li>
+          </ul>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+              <img alt="image" src="" class="rounded-circle mr-1" style="height: 30px !important;" />
+              <div class="d-sm-none d-lg-inline-block">Hi, Admin
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="/adminProfile" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              <a href="/changePasswordForm" class="dropdown-item has-icon">
+                <i class="fas fa-columns"></i> Change Password
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item has-icon text-danger" data-toggle="tooltip" title="Logout"
+                data-confirm="Are You Sure want to logout!" data-confirm-yes=" location.href='/logout'"
+                style="cursor: pointer;"> <i class=" fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="/dashboardAdminLogin" style="font-size: 20px;">Entree</a>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="/dashboardAdminLogin">EN</a>
+          </div>
+          <ul class="sidebar-menu">
+            <li><a class="nav-link" href="/dashboardAdminLogin"><i class="far fa-square"></i>
+                <span>Dashboard</span></a></li>
+            <li><a class="nav-link" href="/users"><i class="far fa-user"></i>
+                <span>Users</span></a></li>
+            <!-- <li><a class="nav-link" href="/recipes"><i class="fas fa-pizza-slice"></i>
+								<span>Recipes</span></a></li> -->
+            <li><a class="nav-link" href="/service"><i class="fa fa-cog"></i>
+                <span>Services </span></a></li>
+            <li><a class="nav-link" href="/category"><i class="fas fa-list-alt"></i>
+                <span>Category </span></a></li>
+            <li><a class="nav-link" href="/booking"><i class="fas fa-list-alt"></i>
+                <span>Booking </span></a></li>
+            <li><a class="nav-link" href="/transactions"><i class="fas fa-dollar-sign"></i>
+                <span>Transaction </span></a></li>
+            <li><a class="nav-link" href="/banner"><i class="fas fa-image"></i>
+                <span>Banner </span></a></li>
+            <li class="menu-header">Settings</li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <span>Settings</span></a>
+              <ul class="dropdown-menu">
+                <!-- <li><a class="nav-link" href="/tags">Tags</a></li> -->
+                <li><a class="nav-link" href="/privatePolicy">Privacy & Policy</a></li>
+                <li><a class="nav-link" href="/termsAndCondition">Terms & Conditions</a></li>
+                <li><a class="nav-link" href="/contactUs">Contact Us</a></li>
+                <li><a class="nav-link" href="/reports">Report Us</a></li>
+              </ul>
+            </li>
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Dashboard</h1>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <a href="/users">
+                  <div class="card-icon bg-primary">
+                    <i class="far fa-user"></i>
+                  </div>
+                  <div class="card-wrap">
+                    <div class="card-header">
+                      <h4>Total User Registered</h4>
+                    </div>
+                    <div class="card-body">89
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <a href="/booking">
+                  <div class="card-icon bg-danger">
+                    <i class="far fa-newspaper"></i>
+                  </div>
+                  <div class="card-wrap">
+                    <div class="card-header">
+                      <h4>Number Of Bookings</h4>
+                    </div>
+                    <div class="card-body">3
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="card card-statistic-1">
+                <a href="/service">
+                  <div class="card-icon bg-warning">
+                    <i class="far fa-file"></i>
+                  </div>
+                  <div class="card-wrap">
+                    <div class="card-header">
+                      <h4>Number of Services</h4>
+                    </div>
+                    <div class="card-body">19
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval
+            Azhar</a>
+        </div>
+        <div class="footer-right">
+          2.3.0
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../../public/assets/js/stisla.js"></script>
+
+  <!-- JS Libraies -->
+
+  <!-- Template JS File -->
+  <script src="../../public/assets/js/scripts.js"></script>
+  <script src="../../public/assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../../public/assets/js/page/index-0.js"></script>
+</body>
+
+</html>

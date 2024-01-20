@@ -1,0 +1,131 @@
+<% var title='Transaction Page' %>
+    <% var page='transactions' %>
+        <% var body=false %>
+            <% include ../layouts/master %>
+                <% include ../partials/header%>
+                    <link rel="stylesheet" href="../../public/assets/css/boostrap.css">
+                    <link rel="stylesheet" href="../../public/assets/css/selectData.css">
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Transactions</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item">Transactions</div>
+                                </div>
+                            </div>
+                            <% if(successmessage !='' ){%>
+                                <div class="alert alert-success alert-dismissible show fade successmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= successmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h2 class="section-title">Transactions</h2>
+                                                <p class="section-lead">Transactions List</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="card-body">
+                                                    <% if(transactionList.length> 0) { %>
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table-1">
+                                                                <thead>
+                                                                    <th>Sr.</th>
+                                                                    <th>Name</th>
+                                                                    <th>Transaction Id</th>
+                                                                    <th>Transaction Date</th>
+                                                                    <th>Status</th>
+                                                                    <th style="text-align: center;">Action</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% for(var i=0; i < transactionList.length; i++) {%>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= i+1 %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= transactionList[i].name %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= transactionList[i].transactionId %>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <%= moment(transactionList[i].date).format('DD MMMM, YYYY') %>
+                                                                            </td>
+
+                                                                            <td>
+                                                                                <% if(transactionList[i].status=="done"
+                                                                                    ) { %>
+                                                                                    <div class="alert alert-success"
+                                                                                        style="max-width:95px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;">
+                                                                                        DONE
+                                                                                    </div>
+                                                                                    <% } %>
+                                                                                        <% if(transactionList[i].status=="failed"
+                                                                                            ) { %>
+                                                                                            <div class="alert alert-danger"
+                                                                                                style="max-width:95px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;">
+                                                                                                FAILED
+                                                                                            </div>
+                                                                                            <% } %>
+                                                                            </td>
+                                                                            <td class="d-flex justify-content-around" style="min-height: 35px;">
+                                                                                <a class="btn btn-danger "
+                                                                                    data-toggle="tooltip" title="Delete"
+                                                                                    style="
+                                                                                    width: 10px !important;
+                                                                                    text-align: center !important;
+                                                                                    padding-left: 7px !important;
+                                                                                    padding-right: 17px !important;
+                                                                                    height: 26px !important;
+                                                                                    padding-top: 0px !important;
+                                                                                    color: white !important;
+                                                                                    margin-right: 5px !important;
+                                                                                " data-confirm="Are You Sure?|This action can not be undone. Do you want to delete transaction?"
+                                                                                    data-confirm-yes="location.href='/deleteTransaction?id=<%= transactionList[i]._id %>'"><i
+                                                                                        style="font-size: 10px !important"
+                                                                                        class="fas fa-trash-alt"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <% } else {%>
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-12 col-lg-12 "
+                                                                    style="text-align:center">
+                                                                    <img src="../../public//assets//img/noRecord.svg" />
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+
+                    <script type="text/javascript"
+                        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src="../../../public/assets/js/page/modules-datatables.js"></script>
+                    <script src="../../"></script>
+
+                    <script type="text/javascript"
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.js"
+                        integrity="sha512-dc2FZrizXo7Qgp7fVmaxd9bDVoDAoDI8JfVR0MjkxUeJzPXa2M+R1nx7X0FVdlH6znGYo+BASCVsLnu5gTQQlQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                    <% include ../partials/footer%>

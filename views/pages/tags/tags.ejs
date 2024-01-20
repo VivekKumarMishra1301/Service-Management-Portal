@@ -1,0 +1,173 @@
+<% var title='Tags Page' %>
+    <% var page='Tags' %>
+        <% var body=false %>
+            <% include ../../layouts/master %>
+                <% include ../../partials/header%>
+                <link rel="stylesheet" href="../../../public/assets/css/boostrap.css">
+                <link rel="stylesheet" href="../../../public/assets/css/selectData.css">
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Tags</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item">Tags</div>
+                                </div>
+                            </div>
+                            <% if(successmessage !='' ){%>
+                                <div class="alert alert-success alert-dismissible show fade successmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= successmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h2 class="section-title">Tags</h2>
+                                                <p class="section-lead">Tags List</p>
+                                            </div>
+                                            <div style="padding-right:60px">
+                                                <a href="/addTag" style="margin-top:34px;height:36px;"
+                                                    class="btn btn-primary">ADD TAG</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+
+                                                <div class="card-body">
+                                                    <% if(tagsList.length> 0) { %>
+
+                                                        <div class="table-responsive">
+                                                            <table class="table table-striped" id="table-1">
+                                                                <thead>
+                                                                    <th>Sr.</th>
+                                                                    <th>Tag Name</th>
+                                                                    <th>Status</th>
+                                                                    <th style="text-align: center;">Action</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% for(var i=0; i < tagsList.length; i++) { %>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= i+1 %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= tagsList[i].tagName %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <% if(tagsList[i].status=="Active" ) {
+                                                                                    %>
+                                                                                    <select
+                                                                                        class="form-control alert alert-success"
+                                                                                        style="max-width:95px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                        name="status"
+                                                                                        onchange="toggleStatus('<%= tagsList[i]._id %>','<%= tagsList[i].status %>')">
+                                                                                        <option value="Active"
+                                                                                            style="background-color: white">
+                                                                                            Active
+                                                                                        </option>
+                                                                                        <option value="Inactive"
+                                                                                            style="background-color: white">
+                                                                                            Inactive</option>
+                                                                                    </select>
+                                                                                    <% } %>
+                                                                                        <% if(tagsList[i].status=="Inactive"
+                                                                                            ) { %>
+                                                                                            <select
+                                                                                                class="form-control alert alert-danger"
+                                                                                                style="max-width:110px;max-height:20px; padding-top: 0px !important; padding-bottom: 0px !important; text-align: center;"
+                                                                                                name="status"
+                                                                                                onchange="toggleStatus('<%= tagsList[i]._id %>','<%= tagsList[i].status %>')">
+                                                                                                <option value="Inactive"
+                                                                                                    style="background-color: white">
+                                                                                                    Inactive</option>
+                                                                                                <option value="Active"
+                                                                                                    style="background-color: white">
+                                                                                                    Active
+                                                                                                </option>
+                                                                                            </select>
+                                                                                            <% } %>
+                                                                            </td>
+                                                                            <td class="d-flex justify-content-center" style="min-height: 35px !important;">
+                                                                                <a class="btn btn-danger " style="
+                                                                            width: 10px !important;
+                                                                            text-align: center !important;
+                                                                            padding-left: 7px !important;
+                                                                            padding-right: 17px !important;
+                                                                            height: 26px !important;
+                                                                            padding-top: 0px !important;
+                                                                            color: white !important;
+                                                                            margin-right: 5px !important;
+                                                                        " data-toggle="tooltip" title="Delete"
+                                                                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to delete tag?"
+                                                                                    data-confirm-yes="location.href='/deleteTag?id=<%= tagsList[i]._id %>'"><i
+                                                                                        class="fas fa-trash-alt"></i></a>
+                                                                                <a href="editTag?id=<%= tagsList[i]._id %>"
+                                                                                    style="
+                                                                                width: 10px !important;
+                                                                                text-align: center !important;
+                                                                                padding-left: 7px !important;
+                                                                                padding-right: 17px !important;
+                                                                                height: 26px !important;
+                                                                                padding-top: 0px !important;
+                                                                                color: white !important;
+                                                                                margin-right: 5px !important;
+                                                                            " class="btn btn-success"><i
+                                                                                        class="fas fa-edit"></i></a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <% }else{ %>
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-12 col-lg-12 "
+                                                                    style="text-align:center">
+                                                                    <img src="../../public//assets//img/noRecord.svg" />
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+                    </section>
+                    </div>
+                    <script type="text/javascript"
+                        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src="../../../public/assets/js/page/modules-datatables.js"></script>
+
+                    <script type="text/javascript"
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.js"
+                        integrity="sha512-dc2FZrizXo7Qgp7fVmaxd9bDVoDAoDI8JfVR0MjkxUeJzPXa2M+R1nx7X0FVdlH6znGYo+BASCVsLnu5gTQQlQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <script>
+                        function toggleStatus(id, status) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/updateStatus",
+                                data: {
+                                    id: id,
+                                    status: status,
+                                    list: "tag"
+                                },
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    console.log(data);
+                                }
+                            });
+                        }
+                    </script>
+                    <% include ../../partials/footer%>

@@ -1,0 +1,50 @@
+<!-- pages/users/users.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Page</title>
+</head>
+
+<body>
+    <h1>Welcome to the Users Page</h1>
+
+    <% if (successmessage) { %>
+        <div class="success-message">
+            <%= successmessage %>
+        </div>
+        <% } %>
+
+            <% if (errmessage) { %>
+                <div class="error-message">
+                    <%= errmessage %>
+                </div>
+                <% } %>
+
+                    <% if (admin) { %>
+                        <h2>Admin Details:</h2>
+                        <p>User ID: <%= admin._id %>
+                        </p>
+                        <!-- Include other properties you want to display -->
+                        <% } %>
+
+                            <% if (usersList && usersList.length> 0) { %>
+                                <h2>User List:</h2>
+                                <ul>
+                                    <% usersList.forEach(user=> { %>
+                                        <li>
+                                            User ID: <%= user._id %>
+                                                <!-- Include other properties you want to display -->
+                                        </li>
+                                        <% }); %>
+                                </ul>
+                                <% } else { %>
+                                    <p>No users found.</p>
+                                    <% } %>
+
+</body>
+
+</html>

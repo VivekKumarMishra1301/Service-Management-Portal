@@ -1,0 +1,54 @@
+<% var title='Forgot Password' %>
+  <% var page='auth-forgot-password' %>
+    <% var body=false %>
+      <% include ../../layouts/master %>
+        <section class="section">
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <div class="login-brand">
+                  <img src="../../../public/assets/img/stisla-fill.svg" alt="logo" width="100"
+                    class="shadow-light rounded-circle">
+                </div>
+                <% if(error){ %>
+                                    <div class="alert alert-danger alert-dismissible show fade error">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">
+                                                <span>&times;</span>
+                                            </button>
+                                            OTP is Incorrect .
+                                        </div>
+                                    </div>
+                                    <% } %>
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h4>Forgot Password</h4>
+                  </div>
+                  <div class="card-body">
+                    <p class="text-muted">Enter OTP</p>
+                    <form method="POST" action="/validateotp">
+                        <div class="form-group">
+                        <label for="email">Enter Your Email</label>
+                        <input id="email" type="email" class="form-control" name="email" tabindex="1" required
+                          autofocus placeholder="Enter your Email">
+                      </div>
+                      <div class="form-group">
+                        <label for="otp">Enter Your OTP</label>
+                        <input id="email" type="number" class="form-control" name="otp" tabindex="1" required
+                          autofocus placeholder="Enter your OTP">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" style="font-size: 15px" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="simple-footer">
+                  Copyright &copy; Stisla 2018
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>

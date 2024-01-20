@@ -1,0 +1,136 @@
+<% var title='User Page' %>
+    <% var page='users' %>
+        <% var body=false %>
+            <% include ../../layouts/master %>
+                <% include ../../partials/header%>
+                    <link rel="stylesheet" href="../../../public/assets/css/boostrap.css">
+                    <link rel="stylesheet" href="../../../public/assets/css/selectData.css">
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Category</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item">Catgories</div>
+                                </div>
+                            </div>
+                            <% if(successmessage !='' ){%>
+                                <div class="alert alert-success alert-dismissible show fade successmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= successmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h2 class="section-title">Categories</h2>
+                                                <p class="section-lead">Categories List</p>
+                                            </div>
+                                            <div style="padding-right:60px">
+                                                <a href="/addCategory" style="margin-top:34px;height:36px;"
+                                                    class="btn btn-primary">ADD CATEGORIES</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <% if(catgoriesList?.length> 0) { %>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped" id="table-1">
+                                                                    <thead>
+                                                                        <th>Sr.</th>
+                                                                        <th>Category Name</th>
+                                                                        <th>Parent Category Name</th>
+                                                                        <th style="text-align: center;">Action</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <% for(var i=0; i < catgoriesList.length; i++) {
+                                                                            %>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <%= i+1 %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <% if(catgoriesList[i].parentCount>
+                                                                                        0){%>
+                                                                                        <% for(var j=0; j <
+                                                                                            catgoriesList[i].branch.length;
+                                                                                            j++){%>
+                                                                                            &#8722
+                                                                                            <%}%>
+                                                                                                <%}%>
+                                                                                                    <%= catgoriesList[i].name
+                                                                                                        %>
+                                                                                </td>
+                                                                                <td>
+
+                                                                                    <%= catgoriesList[i].parent%>
+                                                                                </td>
+                                                                                <td
+                                                                                    class="d-flex justify-content-center">
+                                                                                    <a class="btn btn-danger "
+                                                                                        data-toggle="tooltip"
+                                                                                        title="Delete"
+                                                                                        data-confirm="Are You Sure?|This action can not be undone. Do you want to delete category?"
+                                                                                        data-confirm-yes="location.href='/deleteCategory?id=<%= catgoriesList[i]._id %>'"
+                                                                                        style="
+                                                                            width: 10px !important;
+                                                                            text-align: center !important;
+                                                                            padding-left: 7px !important;
+                                                                            padding-right: 17px !important;
+                                                                            height: 26px !important;
+                                                                            padding-top: 0px !important;
+                                                                            color: white !important;
+                                                                            margin-right: 5px !important;
+                                                                        "><i style="font-size: 10px !important"
+                                                                                            class="fas fa-trash-alt"></i></a>
+                                                                                    <a href="editUser?id=<%= catgoriesList[i]._id %>"
+                                                                                        class="btn btn-success" style="
+                                                                            width: 10px !important;
+                                                                            text-align: center !important;
+                                                                            padding-left: 7px !important;
+                                                                            padding-right: 17px !important;
+                                                                            height: 26px !important;
+                                                                            margin-right: 5px !important;
+                                                                            padding-top: 0px !important;
+                                                                        "><i style="font-size: 10px !important"
+                                                                                            class="fas fa-edit"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <% } %>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <% } else {%>
+                                                                <div class="row">
+                                                                    <div class="col-12 col-md-12 col-lg-12 "
+                                                                        style="text-align:center">
+                                                                        <img
+                                                                            src="../../public//assets//img/noRecord.svg" />
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+
+                    <script type="text/javascript"
+                        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+                    <script src="../../../public/assets/js/page/modules-datatables.js"></script>
+                    <script type="text/javascript"
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.js"
+                        integrity="sha512-dc2FZrizXo7Qgp7fVmaxd9bDVoDAoDI8JfVR0MjkxUeJzPXa2M+R1nx7X0FVdlH6znGYo+BASCVsLnu5gTQQlQ=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    <% include ../../partials/footer%>

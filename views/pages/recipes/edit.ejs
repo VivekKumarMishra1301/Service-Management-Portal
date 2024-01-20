@@ -1,0 +1,152 @@
+<% var title='Edit Recipes Page' %>
+    <% var page='EditRecipes' %>
+        <% var body=false %>
+            <% include ../../layouts/master %>
+                <% include ../../partials/header%>
+                    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+                        rel="stylesheet" />
+                    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                    <div class="main-content">
+                        <section class="section">
+                            <div class="section-header">
+                                <h1>Recipes</h1>
+                                <div class="section-header-breadcrumb">
+                                    <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a>
+                                    </div>
+                                    <div class="breadcrumb-item"><a href="/recipes">Recipes</a></div>
+                                    <div class="breadcrumb-item">Edit</div>
+                                </div>
+                            </div>
+                            <% if(errmessage !='' ){%>
+                                <div class="alert alert-danger alert-dismissible show fade errmessage">
+                                    <div class="alert-body">
+                                        <button class="close" data-dismiss="alert">
+                                            <span>&times;</span>
+                                        </button>
+                                        <%= errmessage %>
+                                    </div>
+                                </div>
+                                <% } %>
+                                    <div class="section-body">
+                                        <h2 class="section-title">Edit Recipe</h2>
+                                        <p class="section-lead">
+                                            Edit recipe according to the form requirement .
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12 col-lg-12">
+                                                <div class="card">
+                                                    <form method="POST" action="/updateRecipe" class="needs-validation"
+                                                        novalidate="" enctype="multipart/form-data">
+                                                        <input value="<%= recipe._id %>" name="id"
+                                                            style="display: none;" />
+                                                        <div class="card-header">
+                                                            <h4>Recipe Details</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class=" d-flex justify-content-between">
+                                                                <div class="form-group col-6">
+                                                                    <label>Food Name</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        value="<%= recipe.name %>" required=""
+                                                                        pattern="([A-zÀ-ž\s]){2,}"
+                                                                        placeholder="Enter Food Name">
+                                                                    <div class="invalid-feedback">
+                                                                        What's Food name?
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group col-6">
+                                                                    <label>Creator Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                    pattern="([A-zÀ-ž\s]){2,}"
+                                                                        value="<%= recipe.creatorName %>"
+                                                                        name="creatorName" required=""
+                                                                        placeholder="Enter Creator Name">
+                                                                    <div class="invalid-feedback">
+                                                                        What's creator name?
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" d-flex justify-content-between">
+                                                                <div class="form-group col-6">
+                                                                    <div class="form-group">
+                                                                        <label>Tags</label>
+                                                                        <select class="form-control select2" name="tags"
+                                                                            multiple>
+                                                                            <% for(var i=0; i < recipe.tags.length; i++)
+                                                                                { %>
+                                                                                <option value="<%= recipe.tags[i] %>"
+                                                                                    selected>
+                                                                                    <%=recipe.tags[i] %>
+                                                                                </option>
+                                                                                <% } %>
+                                                                                    <% for(var i=0; i < tags.length;
+                                                                                        i++) { %>
+                                                                                        <option
+                                                                                            value="<%= tags[i].tagName %>">
+                                                                                            <%= tags[i].tagName %>
+                                                                                        </option>
+                                                                                        <% } %>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">
+                                                                            Select one tag.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group col-6">
+                                                                    <label>Status</label>
+                                                                    <select class="form-control" name="status">
+                                                                        <option value="<%= recipe.status %>">
+                                                                            <%= recipe.status %>
+                                                                        </option>
+                                                                        <option value="Active">Active</option>
+                                                                        <option value="Inactive">Inactive</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                        select status
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" d-flex justify-content-between">
+                                                                <div class="form-group col-6">
+                                                                    <label>Video</label>
+                                                                    <input type="file" name="image"
+                                                                        class="form-control" accept="video/mp4, video/mov"/>
+                                                                    <% if(recipe.fileType=="image" ){ %>
+                                                                        <img src="<%= recipe.file %>" width="100px"
+                                                                            height="100px" name />
+                                                                        <% }else{ %>
+                                                                            <video src=" <%=recipe.file %>"
+                                                                                width="100px" autoplay muted
+                                                                                height="100px" />
+                                                                            <% } %>
+                                                                                <input type="hidden"
+                                                                                    value="<%= recipe.file %>"
+                                                                                    name="old_image" />
+                                                                                <input type="hidden"
+                                                                                    value="<%= recipe.fileType %>"
+                                                                                    name="old_fileType" />
+                                                                </div>
+                                                            </div>
+                                                            <div class=" form-group col-sm-12 col-md-12 col-lg-12">
+                                                                <label>Ingredients</label>
+                                                                <textarea class="summernote" name="ingredients"
+                                                                    placeholder="Enter Food ingredients"> <%= recipe.ingredients %></textarea>
+                                                            </div>
+                                                            <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                                                <label>Description</label>
+                                                                <textarea class="summernote" name="description"
+                                                                    placeholder="Enter Food description"><%= recipe.description %></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-right" style="padding-right:40px">
+                                                            <button class="btn btn-primary"
+                                                                style="font-size: 14px;">Submit</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </section>
+                    </div>
+                    <% include ../../partials/footer%>
