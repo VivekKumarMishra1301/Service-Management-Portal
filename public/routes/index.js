@@ -42,6 +42,7 @@ module.exports = function (app) {
       res.render('pages/auth/login', {
         error: null,
         success: null,
+        changePassword:false
       });
     } catch (e) {
       console.log(e.message);
@@ -86,21 +87,27 @@ module.exports = function (app) {
 
   app.post('/changePassword', async function (req, res) {
     try {
-      console.log(req.session.user);
+      console.log(req.cookies.userId);
       let { password, cpassword, opassword } = req.body;
 
       if (password == cpassword) {
-        let admin = await Users.findOne({ role: 'Admin' });
-        if (opassword == admin.password) {
+        // let admin = await Users.findOne({ role: 'Admin' });
+        // if (opassword == admin.password) {
+        const salt = await bcrypt.genSalt(10);
+  password = await bcrypt.hash(password, salt);
           let updateAdmin = await Users.findOneAndUpdate(
-            { _id: admin._id },
+            { _id: req.cookies.userId },
             { password: password }
           );
-          console.log(updateAdmin);
+        //   console.log(updateAdmin);
           if (updateAdmin) {
-            res.render('pages/auth/login', { error: false, success: true });
+            res.render('pages/auth/login', { error: false, success: false,changePassword:true });
           }
-        } else {
+        // }
+      //   if () {
+          
+      //   }
+      else {
           let error = 'Wrong Password!';
           res.render('pages/auth/changePassword', { error: error });
         }
@@ -128,16 +135,18 @@ module.exports = function (app) {
 
   app.post('/validateotp', async function (req, res) {
     try {
-      const { email } = req.body;
-      const user = await Users.findOne({ email: email });
+      // const { email } = req.body;
+      console.log(req.cookies.userId)
+      const user = await Users.findOne({ _id: req.cookies.userId });
       console.log(user.otp);
       if (req.body.otp != user.otp) {
         res.render('pages/auth/otp', { error: true });
       } else {
         const result = await Users.updateOne(
-      { email: req.body.email },
+      { _id: req.cookies.userId },
       { $set: { otp: null } }
         );
+        // res.cookie('userId', user._id);
         res.render('pages/auth/changePassword', { error: false });
       }
     } catch (error) {
@@ -181,7 +190,10 @@ module.exports = function (app) {
      const user = await Users.updateOne(
       { email: req.body.email },
       { $set: { otp: otp } }
-    );
+     );
+      const result = await Users.findOne({ email: req.body.email });
+      console.log(user)
+      res.cookie('userId', result._id);
   // console.log('Message sent: %s', info.messageId);
   // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
@@ -333,6 +345,7 @@ module.exports = function (app) {
       res.render('pages/auth/login', {
         error: null,
         success: 'Now You can login',
+        changePassword:false
       });
     } catch (e) {
       console.error(e.message);
