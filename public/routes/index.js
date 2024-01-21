@@ -47,7 +47,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
   app.get('/signupform', function (req, res) {
@@ -60,7 +60,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -118,7 +118,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -128,7 +128,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -152,7 +152,7 @@ module.exports = function (app) {
     } catch (error) {
       console.log(error.message);
       console.log(error.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -201,7 +201,7 @@ module.exports = function (app) {
     } catch (error) {
       console.log(error.message);
       console.log(error.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
 
 
@@ -261,7 +261,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -285,6 +285,7 @@ module.exports = function (app) {
         };
          req.session.save();
         res.cookie('accesstoken', accessToken, { httpOnly: true });
+        res.cookie('userId', user._id);
         res.render('pages/dashboard', { user });
       } else {
         res.status(401);
@@ -327,7 +328,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
   app.post('/register', async function (req, res) {
@@ -352,9 +353,9 @@ module.exports = function (app) {
       console.error(e.stack);
 
       // Pass an error message to the error page
-      // res.render('pages/auth/error/internalError', {
-      //   errorMessage: 'Internal server error. Please try again later.',
-      // });
+      res.render('pages/auth/error/internalError', {
+        errorMessage: 'Internal server error. Please try again later.',
+      });
       res.send('jdg');
     }
   });
@@ -378,7 +379,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -438,7 +439,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -464,7 +465,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -484,7 +485,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -509,7 +510,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -588,7 +589,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -609,7 +610,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -621,7 +622,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -648,7 +649,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -670,7 +671,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -684,7 +685,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -736,7 +737,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -759,7 +760,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -783,7 +784,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -853,7 +854,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -875,7 +876,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -912,7 +913,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -933,7 +934,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -947,7 +948,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -975,7 +976,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -994,7 +995,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1017,7 +1018,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1054,7 +1055,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1075,7 +1076,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1096,7 +1097,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1115,7 +1116,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1148,7 +1149,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1185,7 +1186,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1218,7 +1219,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1255,7 +1256,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1276,7 +1277,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1295,7 +1296,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1326,7 +1327,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1367,7 +1368,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1414,7 +1415,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1438,7 +1439,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1466,7 +1467,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1490,7 +1491,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1549,7 +1550,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1569,7 +1570,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1603,7 +1604,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1622,7 +1623,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1642,7 +1643,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1656,7 +1657,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1680,7 +1681,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1699,7 +1700,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1720,7 +1721,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1767,7 +1768,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1794,7 +1795,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1831,7 +1832,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1850,7 +1851,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1872,7 +1873,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1892,7 +1893,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1908,7 +1909,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1927,7 +1928,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1950,7 +1951,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -1985,7 +1986,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+     res.render('pages/auth/error/internalError');
     }
   });
 
@@ -2005,7 +2006,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -2023,7 +2024,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -2041,7 +2042,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 
@@ -2059,7 +2060,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
   app.get('/getServices', auth, async function (req, res) {
@@ -2076,7 +2077,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
   app.get('/getBanner', auth, async function (req, res) {
@@ -2093,7 +2094,7 @@ module.exports = function (app) {
     } catch (e) {
       console.log(e.message);
       console.log(e.stack);
-      res.render('pages/error/internalError');
+      res.render('pages/auth/error/internalError');
     }
   });
 };

@@ -1,4 +1,4 @@
-<!-- pages/users/users.ejs -->
+<!-- pages/users/users.ejs
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,7 @@
                         <p>User ID: <%= admin._id %>
                         </p>
                         <!-- Include other properties you want to display -->
-                        <% } %>
+                        <!-- <% } %>
 
                             <% if (usersList && usersList.length> 0) { %>
                                 <h2>User List:</h2>
@@ -37,7 +37,7 @@
                                     <% usersList.forEach(user=> { %>
                                         <li>
                                             User ID: <%= user._id %>
-                                                <!-- Include other properties you want to display -->
+                                                Include other properties you want to display
                                         </li>
                                         <% }); %>
                                 </ul>
@@ -45,6 +45,106 @@
                                     <p>No users found.</p>
                                     <% } %>
 
-</body>
+<!-- </body> -->
 
-</html>
+<!-- </html> --> --> -->
+<% var title = 'User Page' %>
+<% var page = 'users' %>
+<% var body = false %>
+<% include ../../layouts/master %>
+<% include ../../partials/header %>
+
+<link rel="stylesheet" href="../../../public/assets/css/boostrap.css">
+<link rel="stylesheet" href="../../../public/assets/css/selectData.css">
+
+<div class="main-content">
+    <section class="section">
+        <% if (successmessage !== '') { %>
+            <div class="alert alert-success alert-dismissible show fade successmessage">
+                <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                    <%= successmessage %>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="section-header">
+            <h1>User Management</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active"><a href="/dashboardAdminLogin">Dashboard</a></div>
+                <div class="breadcrumb-item">Users</div>
+            </div>
+        </div>
+
+        <div class="section-body">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2 class="section-title">User List</h2>
+                    <p class="section-lead">Manage your users here.</p>
+                </div>
+                <div style="padding-right:60px">
+                    <a href="/addUser" style="margin-top:34px;height:36px;" class="btn btn-primary">Add User</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <% if (usersList.length > 0) { %>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="userTable">
+                                        <thead>
+                                            <th>Sr.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th style="text-align: center;">Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <% usersList.forEach((user, index) => { %>
+                                                <tr>
+                                                    <td><%= index + 1 %></td>
+                                                    <td><%= user.name %></td>
+                                                    <td><%= user.email %></td>
+                                                    <td><%= user.role %></td>
+                                                    <td class="d-flex justify-content-center">
+                                                        <!-- Add your action buttons here -->
+                                                        <a class="btn btn-danger" href="#" data-toggle="tooltip" title="Delete">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </a>
+                                                        <a href="/editUser/<%= user._id %>" class="btn btn-success">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <% } else { %>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <img src="../../public/assets/img/noRecord.svg" alt="No records found" />
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Include necessary scripts -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="../../../public/assets/js/page/modules-datatables.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/3.2.2/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-select-bs4/1.4.0/select.bootstrap4.min.js"
+    integrity="sha512-dc2FZrizXo7Qgp7fVmaxd9bDVoDAoDI8JfVR0MjkxUeJzPXa2M+R1nx7X0FVdlH6znGYo+BASCVsLnu5gTQQlQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<% include ../../partials/footer %>
